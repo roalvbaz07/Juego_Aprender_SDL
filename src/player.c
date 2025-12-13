@@ -2,24 +2,22 @@
 #include <SDL3_image/SDL_image.h>
 #include "entity.h"
 
-SDL_Texture* player_texture;
+static SDL_Texture* player_texture;
+static SDL_FRect sprite_portion = {18,16,13,16};
+static SDL_FRect player_position = {250,250,13,16};
 
-
-SDL_FRect sprite_portion = {18,16,13,16};
-SDL_FRect player_position = {250,250,13,16};
-
-void quit(){
+static void quit(){
 
 }
-void handle_events(){
+ static void handle_events(SDL_Event* event){
 
 }
 
-void update(){
+static void update(){
 
 }
 
-void render(SDL_Renderer* renderer){
+static void render(SDL_Renderer* renderer){
 
     SDL_SetTextureScaleMode(player_texture,SDL_SCALEMODE_NEAREST);
     SDL_RenderTexture(renderer,player_texture,&sprite_portion,&player_position);
@@ -30,12 +28,7 @@ Entity init_player(SDL_Renderer* renderer){
     const char path[] ="./char_spritesheet.png";
     player_texture= IMG_LoadTexture(renderer,path);
 
-    Entity player ={
-        .quit = quit, 
-        .handle_events = handle_events,
-        .render = render,
-        .update = update
-    };
+    Entity player ={quit,handle_events,update,render};
 
     return player;
 }

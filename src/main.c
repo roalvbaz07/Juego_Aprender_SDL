@@ -7,6 +7,25 @@
 #include "player.h"
 
 //Zona de definiciones
+#define renderEntities(entites,entities_count,renderer)\
+    for(int i=0;i<entities_count;i++){\
+        entities[i].render(renderer);\
+    }
+
+#define updateEntities(entites,entities_count)\
+    for(int i=0;i<entities_count;i++){\
+        entities[i].update();\
+    }
+
+#define quitEntities(entites,entities_count)\
+    for(int i=0;i<entities_count;i++){\
+        entities[i].quit();\
+    }
+
+#define handleEventsEntities(entites,entities_count,event) \
+    for(int i=0;i<entities_count;i++){\
+        entities[i].handle_events(event);\
+    }
 
 
 //declarar cosas del SDL
@@ -40,15 +59,14 @@ void update(){
 
 //Funcion para renderizar
 void render(){
+
     SDL_RenderClear(renderer);
     SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
 
-    // Renderizar entidades
-
-
-
-    renderEntities(entities,entities_count,renderer);
     //Renderizar el personaje
+
+    renderEntities(entitiesn,entities_count,renderer);
+
     SDL_RenderPresent(renderer);
 
 }
@@ -94,22 +112,3 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char **argv){
 
 }
 
-#define renderEntities(entites,entities_count,renderer)\
-    for(int i=0;i<entities_count;i++){\
-        entities[i].render(renderer);\
-    }
-
-#define updateEntities(entites,entities_count)\
-    for(int i=0;i<entities_count;i++){\
-        entities[i].update();\
-    }
-
-#define quitEntities(entites,entities_count)\
-    for(int i=0;i<entities_count;i++){\
-        entities[i].quit();\
-    }
-
-#define handleEventsEntities(entites,entities_count,event) \
-    for(int i=0;i<entities_count;i++){\
-        entities[i].handle_events(event);\
-    }
