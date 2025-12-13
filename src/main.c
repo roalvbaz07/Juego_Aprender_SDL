@@ -1,42 +1,20 @@
 //Incluir librerias y archivos
-#include <SDL3/SDL_main.h>
-#include <SDL3_image/SDL_image.h>
+#define SDL_MAIN_USE_CALLBACKS
 #include <SDL3/SDL.h>
-#include "entity.h"
-#include "player.h"
+#include <SDL3_image/SDL_image.h>
+#include <SDL3/SDL_main.h>
 
 //Zona de definiciones
-#define SDL_MAIN_USE_CALLBACKS
-#define RENDER_ENTITIES(entities,entities_count,renderer) \
-    for(int i=0;i<entities_count;i++){ \
-        entities[i].render(renderer);\
-    }
 
-#define UPDATE_ENTITIES(entities,entities_count) \
-    for(int i=0;i<entities_count;i++){ \
-        entities[i].update();\
-    }
-
-#define QUIT_ENTITIES(entities,entities_count) \
-    for(int i=0;i<entities_count;i++){ \
-        entities[i].quit();\
-    }
-
-#define HANDLE_EVENTS_ENTITIES(entities,entities_count) \
-    for(int i=0;i<entities_count;i++){ \
-        entities[i].handle_events(event);\
-    }
 
 //declarar cosas del SDL
 SDL_Window* window;
 SDL_Renderer* renderer;
+SDL_Texture* player_texture;
 
-Entity entities[MAX_ENTITIES];
-int entities_count =0;
 
 //Funcion para salir del SDl
 void SDL_AppQuit(void *appstate, SDL_AppResult result){
-    QUIT_ENTITIES(entities,entities_count);
     SDL_DestroyRenderer(renderer);
     renderer=NULL;
     SDL_DestroyWindow(window);
@@ -54,7 +32,6 @@ SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event){
 
 //Funcion para actualizar
 void update(){
-UPDATE_ENTITIES(entities,entities_count);
 }
 
 //Funcion para renderizar
@@ -64,11 +41,12 @@ void render(){
 
     // Renderizar entidades
 
-    RENDER_ENTITIES(entities,entities_count,renderer);
-   
+
+    SDL_RenderTexture(renderer,player_texture,NULL,NULL);
 
     //Renderizar el personaje
     SDL_RenderPresent(renderer);
+
 }
 
 //Funcion par interar 
@@ -84,7 +62,7 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char **argv){
         return SDL_APP_FAILURE;
     }
 
-    window= SDL_CreateWindow(
+    window = SDL_CreateWindow(
         "SLD3 Game",
         800,
         600,
@@ -102,9 +80,12 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char **argv){
         SDL_Log("Error creating renderer: %s",SDL_GetError());
         return SDL_APP_FAILURE;
     }
- 
-    entities[entities_count++]=init_player(renderer);
+
     //Iniciar personajes
+
+    const char path[] ="./char_spritesheet.png";
+    player_texture= IMG_LoadTexture(renderer,path);
+
     return SDL_APP_CONTINUE;
 
 }
