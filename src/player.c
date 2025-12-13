@@ -11,7 +11,7 @@ typedef struct{
 
 Position position = {0,0};
 
-static void quit(){
+static void cleanup(){
 
 }
  static void handle_events(SDL_Event* event){
@@ -47,7 +47,7 @@ Entity init_player(SDL_Renderer* renderer){
     const char path[] ="./char_spritesheet.png";
     player_texture= IMG_LoadTexture(renderer,path);
 
-    Entity player ={quit,handle_events,update,render};
+    Entity player ={cleanup,handle_events,update,render};
 
     return player;
 }
