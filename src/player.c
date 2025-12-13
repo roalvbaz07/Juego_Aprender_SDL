@@ -19,7 +19,21 @@ static void quit(){
 }
 
 static void update(){
+    const _Bool *keyboar_state = SDL_GetKeyboardState(NULL);
 
+    if(keyboar_state[SDL_SCANCODE_W]){
+        position.y-=1;
+    }
+    if(keyboar_state[SDL_SCANCODE_S]){
+        position.y+=1;
+    }
+
+    if(keyboar_state[SDL_SCANCODE_A]){
+        position.x-=1;
+    }
+    if(keyboar_state[SDL_SCANCODE_D]){
+        position.x+=1;
+    }
 }
 
 static void render(SDL_Renderer* renderer){
