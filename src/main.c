@@ -12,9 +12,9 @@
         entities[i].render(renderer);\
     }
 
-#define updateEntities(entites,entities_count)\
+#define updateEntities(entites,entities_count,delta_time)\
     for(int i=0;i<entities_count;i++){\
-        entities[i].update();\
+        entities[i].update(delta_time);\
     }
 
 #define quitEntities(entites,entities_count)\
@@ -33,7 +33,9 @@ SDL_Window* window;
 SDL_Renderer* renderer;
 Entity entities[MAX_ENTITIES];
 int entities_count=0; 
-
+unsigned int last_tick = 0;
+unsigned int current_tick = 0;
+float delta_time;
 //Funcion para salir del SDl
 void SDL_AppQuit(void *appstate, SDL_AppResult result){
     quitEntities(entities,entities_count);
@@ -54,7 +56,14 @@ SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event){
 
 //Funcion para actualizar
 void update(){
-    updateEntities(entities,entities_count);
+    
+    // Calcular el delta time
+    last_tick=current_tick;
+    current_tick = SDL_GetTicks();
+    delta_time= (current_tick-last_tick) / 1000.0f;
+
+    updateEntities(entities,entities_count,delta_time);
+
 }
 
 //Funcion para renderizar
