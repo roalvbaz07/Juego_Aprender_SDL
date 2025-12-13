@@ -3,6 +3,8 @@
 #include <SDL3/SDL.h>
 #include <SDL3_image/SDL_image.h>
 #include <SDL3/SDL_main.h>
+#include "entity.h"
+#include "player.h"
 
 //Zona de definiciones
 
@@ -10,11 +12,12 @@
 //declarar cosas del SDL
 SDL_Window* window;
 SDL_Renderer* renderer;
-SDL_Texture* player_texture;
-
+Entity entities[MAX_ENTITIES];
+int entities_count=0; 
 
 //Funcion para salir del SDl
 void SDL_AppQuit(void *appstate, SDL_AppResult result){
+    quitEntities(entities,entities_count);
     SDL_DestroyRenderer(renderer);
     renderer=NULL;
     SDL_DestroyWindow(window);
@@ -32,6 +35,7 @@ SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event){
 
 //Funcion para actualizar
 void update(){
+    updateEntities(entities,entities_count);
 }
 
 //Funcion para renderizar
@@ -42,8 +46,8 @@ void render(){
     // Renderizar entidades
 
 
-    SDL_RenderTexture(renderer,player_texture,NULL,NULL);
 
+    renderEntities(entities,entities_count,renderer);
     //Renderizar el personaje
     SDL_RenderPresent(renderer);
 
@@ -51,6 +55,7 @@ void render(){
 
 //Funcion par interar 
 SDL_AppResult SDL_AppIterate(void *appstate){
+    update();
     render();
     return SDL_APP_CONTINUE;
 }
@@ -83,9 +88,28 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char **argv){
 
     //Iniciar personajes
 
-    const char path[] ="./char_spritesheet.png";
-    player_texture= IMG_LoadTexture(renderer,path);
+    entities[entities_count++]=init_player(renderer);
 
     return SDL_APP_CONTINUE;
 
 }
+
+#define renderEntities(entites,entities_count,renderer)\
+    for(int i=0;i<entities_count;i++){\
+        entities[i].render(renderer);\
+    }
+
+#define updateEntities(entites,entities_count)\
+    for(int i=0;i<entities_count;i++){\
+        entities[i].update();\
+    }
+
+#define quitEntities(entites,entities_count)\
+    for(int i=0;i<entities_count;i++){\
+        entities[i].quit();\
+    }
+
+#define handleEventsEntities(entites,entities_count,event) \
+    for(int i=0;i<entities_count;i++){\
+        entities[i].handle_events(event);\
+    }
