@@ -4,7 +4,12 @@
 
 static SDL_Texture* player_texture;
 static SDL_FRect sprite_portion = {18,16,13,16};
-static SDL_FRect player_position = {250,250,13,16};
+ 
+typedef struct{
+    float x,y;
+} Position;
+
+Position position = {0,0};
 
 static void quit(){
 
@@ -18,7 +23,7 @@ static void update(){
 }
 
 static void render(SDL_Renderer* renderer){
-
+    SDL_FRect player_position = {position.x,position.y,13,16};
     SDL_SetTextureScaleMode(player_texture,SDL_SCALEMODE_NEAREST);
     SDL_RenderTexture(renderer,player_texture,&sprite_portion,&player_position);
 }
