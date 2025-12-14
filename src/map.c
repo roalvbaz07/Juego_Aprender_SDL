@@ -6,6 +6,15 @@ static cute_tiled_layer_t* layer;
 static cute_tiled_tileset_t* tileset;
 static Texture* texture;
 
+static void cleanup(){
+}
+
+static void handle_events(SDL_Event* event){
+}
+
+static void update(float delta_time){
+}
+
 static void render(SDL_Renderer* renderer){
 
     cute_tiled_layer_t* temp_layer = layer;
@@ -19,7 +28,7 @@ static void render(SDL_Renderer* renderer){
         for(int i = 0; i < map->height; i++){
             
             //Eje X
-            for(int j = 0; i < map -> width; j++){
+            for(int j = 0; j < map -> width; j++){
                 
                 int tile_id = temp_layer -> data[i*map ->width + j];
                 
@@ -107,6 +116,9 @@ Entity init_map(SDL_Renderer* renderer){
     }
     
     Entity map_e = {
+        .update= update,
+        .cleanup= cleanup,
+        .handle_events= handle_events,
         .render = render
     };
 
