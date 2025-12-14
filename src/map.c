@@ -49,8 +49,8 @@ static void render(SDL_Renderer* renderer){
                 };
 
                 SDL_FRect dest = {
-                    j * map-> tilewidth,
-                    i * map -> tileheight,
+                    j * map-> tilewidth - camera.x,
+                    i * map -> tileheight - camera.y,
                     map -> tilewidth,
                     map -> tileheight
                 };
@@ -64,7 +64,7 @@ static void render(SDL_Renderer* renderer){
     }
 }
 
-Entity init_map(SDL_Renderer* renderer){
+void init_map(SDL_Renderer* renderer){
     const char map_path[]="./tiled/map.json";
     map = cute_tiled_load_map_from_file(map_path,NULL);
 
@@ -90,7 +90,8 @@ Entity init_map(SDL_Renderer* renderer){
         else{
             SDL_Log("Textura cargada correctamente");
         }
-
+        SDL_SetTextureScaleMode(current_texture -> texture, SDL_SCALEMODE_NEAREST);
+            
         current_texture -> firstgid = tileset -> firstgid;
         current_texture -> tilecount = tileset -> tilecount;
         current_texture -> tileset_width = tileset -> imagewidth;
@@ -110,6 +111,6 @@ Entity init_map(SDL_Renderer* renderer){
         .render = render,
     };
 
-    return map_e;
+    create_entity(map_e);
 
 }

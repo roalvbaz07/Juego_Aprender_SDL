@@ -2,7 +2,8 @@
 #include <SDL3/SDL.h>
 #include <SDL3_image/SDL_image.h>
 #include "entity.h"
-#include "external/cute_tiled.h"
+#include "../external/cute_tiled.h"
+#include "camera.h"
 
 typedef struct Texture{
     SDL_Texture* texture;
@@ -13,4 +14,4 @@ typedef struct Texture{
     struct Texture* next;
 } Texture;
 
-Entity init_map(SDL_Renderer* renderer);
+void init_map(SDL_Renderer* renderer);

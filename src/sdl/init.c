@@ -12,8 +12,8 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char **argv){
 
     state -> window = SDL_CreateWindow(
         "SLD3 Game",
-        800,
-        600,
+        1280,
+        720,
         0
     );
 
@@ -30,9 +30,11 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char **argv){
     }
 
     //Iniciar personajes
+    init_map(state->renderer);
+    init_player(state -> renderer);
+    init_camera(state -> renderer);
 
-    entities[entities_count++]=init_map(state -> renderer);
-    entities[entities_count++]=init_player(state -> renderer);
+    SDL_SetRenderLogicalPresentation(state -> renderer, 320,180,SDL_LOGICAL_PRESENTATION_LETTERBOX);
 
     return SDL_APP_CONTINUE;
 
