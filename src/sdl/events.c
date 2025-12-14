@@ -6,7 +6,9 @@ SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event){
     }
 
     for(int i=0;i<entities_count;i++){
-        entities[i].handle_events(event);
+        
+        if(!entities[i].handle_events) continue;
+        entities[i].handle_events(event); 
     }
     return SDL_APP_CONTINUE;
 }

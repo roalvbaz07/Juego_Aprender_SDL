@@ -7,8 +7,9 @@ void app_update(void *appstate){
     state -> current_tick = SDL_GetTicks();
     state -> delta_time= (state -> current_tick- state -> last_tick) / 1000.0f;
 
-    for(int i=0;i<entities_count;i++){\
-        entities[i].update(state -> delta_time);\
+    for(int i=0;i<entities_count;i++){
+        if(!entities[i].update) continue;
+        entities[i].update(state -> delta_time);
     }
 
 }

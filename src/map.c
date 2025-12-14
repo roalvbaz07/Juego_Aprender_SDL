@@ -6,15 +6,6 @@ static cute_tiled_layer_t* layer;
 static cute_tiled_tileset_t* tileset;
 static Texture* texture;
 
-static void cleanup(){
-}
-
-static void handle_events(SDL_Event* event){
-}
-
-static void update(float delta_time){
-}
-
 static void render(SDL_Renderer* renderer){
 
     cute_tiled_layer_t* temp_layer = layer;
@@ -52,9 +43,9 @@ static void render(SDL_Renderer* renderer){
 
                 SDL_FRect src= {
                     (tile_id - texture_to_use -> firstgid) % tileset_collums * map -> tilewidth,
-                    (tile_id - texture_to_use -> firstgid) % tileset_collums * map -> tileheight,
-                    map ->tilewidth,
-                    map ->tileheight
+                    (tile_id - texture_to_use -> firstgid) / tileset_collums * map -> tileheight,
+                    map -> tilewidth,
+                    map -> tileheight
                 };
 
                 SDL_FRect dest = {
@@ -116,10 +107,7 @@ Entity init_map(SDL_Renderer* renderer){
     }
     
     Entity map_e = {
-        .update= update,
-        .cleanup= cleanup,
-        .handle_events= handle_events,
-        .render = render
+        .render = render,
     };
 
     return map_e;
