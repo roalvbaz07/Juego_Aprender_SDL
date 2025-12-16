@@ -1,5 +1,3 @@
-#include <SDL3/SDL.h>
-#include <SDL3_image/SDL_image.h>
 #include "player.h"
 
 static SDL_Texture* player_texture;
@@ -7,12 +5,13 @@ static SDL_FRect sprite_portion = {18,16,13,16};
 
 
 SpriteSize sprite_size = {13,16};
-Position player_position = {0,0};
+Position player_position = {10,200};
 
 static void cleanup(){
 
 }
- static void handle_events(SDL_Event* event){
+
+static void handle_events(SDL_Event* event){
 
 }
 

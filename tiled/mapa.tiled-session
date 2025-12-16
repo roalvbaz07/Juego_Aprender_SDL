@@ -3,13 +3,14 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map.tmx",
+    "activeFile": "",
     "expandedProjectPaths": [
         "."
     ],
     "fileStates": {
         "": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "Overworld_Tileset.tsx": {
             "scaleInDock": 0.75,
@@ -17,10 +18,10 @@
         },
         "map.tmx": {
             "scale": 1.3260416666666666,
-            "selectedLayer": 2,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 510.54202670856256,
-                "y": 273.74705420267094
+                "x": 20.36135113904166,
+                "y": -82.95365278868815
             }
         },
         "map.tmx#Overworld_Tileset": {
@@ -35,7 +36,6 @@
     "map.tileHeight": 16,
     "map.tileWidth": 16,
     "openFiles": [
-        "map.tmx"
     ],
     "project": "mapa.tiled-project",
     "recentFiles": [

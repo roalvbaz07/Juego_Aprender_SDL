@@ -10,7 +10,7 @@ typedef struct{
 } Position;
 
 typedef struct {
-float w,h;
+    float w,h;
 } SpriteSize;
 
 extern Position player_position; 

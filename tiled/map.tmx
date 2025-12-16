@@ -5,6 +5,34 @@
  </editorsettings>
  <tileset firstgid="1" name="Overworld_Tileset" tilewidth="16" tileheight="16" tilecount="234" columns="18">
   <image source="../assets/Overworld_Tileset.png" width="288" height="208"/>
+  <tile id="103">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0.181818" y="2">
+     <polygon points="0,0 6.09091,0.0909091 5.90909,5.90909 4.90909,6.27273 5.18182,8.45455 8.09091,8.81818 8.09091,9.54545 12.9091,9.54545 13.1818,10.5455 14,10.5455 13.9091,13.6364 0.0909091,13.9091"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="121">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0.0909091" y="0.363636">
+     <polygon points="0,0 13.4545,-0.363636 14.9091,13.9091 13.3636,15.5455 -0.0909091,15.6364"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="139">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="13.0909" y="0.181818">
+     <polygon points="0,0 -0.454545,2.72727 -4,2.81818 -4.90909,15.8182 -12.9091,15.7273 -12.9091,0"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="157">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="7.90909" y="0.181818">
+     <polygon points="0,0 0.181818,10.9091 -7.72727,11.4545 -7.90909,-0.363636"/>
+    </object>
+   </objectgroup>
+  </tile>
  </tileset>
  <layer id="1" name="fondo" width="30" height="20">
   <data encoding="csv">

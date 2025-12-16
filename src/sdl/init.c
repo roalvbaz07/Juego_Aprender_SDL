@@ -14,7 +14,7 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char **argv){
         "SLD3 Game",
         1280,
         720,
-        0
+        SDL_WINDOW_RESIZABLE
     );
 
     if(!state -> window){
@@ -34,7 +34,7 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char **argv){
     init_player(state -> renderer);
     init_camera(state -> renderer);
 
-    SDL_SetRenderLogicalPresentation(state -> renderer, 320,180,SDL_LOGICAL_PRESENTATION_LETTERBOX);
+    SDL_SetRenderLogicalPresentation(state -> renderer, 640,320,SDL_LOGICAL_PRESENTATION_LETTERBOX);
 
     return SDL_APP_CONTINUE;
 
